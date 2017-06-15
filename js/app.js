@@ -18,9 +18,9 @@ $(_=>{
 
 	getPokedex((error,data)=>{
 		if(error) console.log("hubo un error");	
-
+		
 		const root = $(".root");
 		render(root,data.pokemon_entries);
 
-	},"pokedex");	
+	});	
 });

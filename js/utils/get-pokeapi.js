@@ -1,7 +1,7 @@
-const getPokedex = (callback,endpoint,id)=>{
+const getPokedex = (callback)=>{
 
-	const Url = 'https://pokeapi.co/api/v2/';
-	
+	const Url = 'https://pokeapi.co/api/v2/pokedex/1';
+
 	const xhr = new XMLHttpRequest();
 
 	xhr.addEventListener('load',_=>{
@@ -9,12 +9,25 @@ const getPokedex = (callback,endpoint,id)=>{
 		callback(null,xhr.response);
 	});
 	
-	if(id==undefined || id==null){
-		xhr.open('GET', Url+endpoint+"/1");
-	}else{
-		xhr.open('GET', Url+endpoint+"/"+id+"/");
-	}	
+	xhr.open('GET', Url);	
 
 	xhr.responseType ='json';
 	xhr.send();
 };
+
+/*const getPokemon = (callback,id)=>{
+
+	const Url = 'https://pokeapi.co/api/v2/pokemon/';
+
+	const xhr = new XMLHttpRequest();
+
+	xhr.addEventListener('load',_=>{
+		if(xhr.status !=200) callback(new Error("Error al obtener pokemon"));
+		callback(null,xhr.response);
+	});
+	
+	xhr.open('GET', Url+id+"/");
+	
+	xhr.responseType ='json';
+	xhr.send();
+};*/
