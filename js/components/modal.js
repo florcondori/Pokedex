@@ -1,10 +1,10 @@
 'use strict';
 const Modal = ()=>{
-	const modal = $("<div clas='modal'></div>");
+	const modal = $("<div class='modal'></div>");
 
 
 	getPokemon((error,data)=>{
-		if(error) console.log("hubo un error");	
+		if(error) console.log("hubo un error al traer el pokemon");	
 		
 		console.log(data);
 
@@ -22,28 +22,6 @@ const Modal = ()=>{
 	return name;
 };
 
-const reRender = (container,encontrados)=>{
-	container.empty();
-
-	container.append(descripcion(encontrados.abilities));
-		
-};
-
-const Modal =(data)=>{
-	const modal = $("<div class='modal'></div>");
-	const container = $("<div></div>");
-
-	modal.append(container);
-	reRender(container,data);	
-	
-	
-
-		console.log(data.name);
-		var tipo =data.types;
-		var hability = data.abilities;
-		hability.forEach((obj)=>{console.log(obj.ability.name);});
-	return modal;
-};
 
 */
 

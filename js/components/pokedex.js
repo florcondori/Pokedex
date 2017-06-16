@@ -1,17 +1,5 @@
 'use strict';
-const mostrarModal = (modal)=>{
-	modal.empty();
-	modal.show();
-	console.log(state.pokemonSelected);
-	getPokemon((error,data)=>{
-		if(error) console.log("hubo un error");	
-		
-		console.log(data);
-
-	}, state.pokemonSelected);
-};
-
-const itemPokemon = (data)=>{
+const itemPokemon = (data, update)=>{
 	let name = data.pokemon_species.name;
 	let id = data.entry_number;
 	let idNew;
@@ -34,9 +22,9 @@ const itemPokemon = (data)=>{
 	
 	ancla.on("click", (e)=>{
 		e.preventDefault();
-
 		state.pokemonSelected = id;	
-		mostrarModal($(".modal"));
+		
+		update();
 	});
 
 	ancla.append(nombre);
@@ -47,27 +35,26 @@ const itemPokemon = (data)=>{
 	return div;
 };
 
-const reRender = (container,encontrados)=>{
+const reRender = (container,encontrados, update)=>{
 	container.empty();
 
 	encontrados.forEach((pokemon)=>{
-		container.append(itemPokemon(pokemon));
+		container.append(itemPokemon(pokemon, update));
 	});
 		
 };
 
-const Pokedex = (data)=>{
+const Pokedex = (update)=>{
 	const div = $("<div></div>");
 	const divFiltro = $("<div></div>");
 	const input = $("<input></input>");
 	const button = $("<button>A-Z</button>");
 	const pokedex = $("<div class='pokedex'></div>");
-	const modal = $("<div class='modal'></div>");
 	
 	input.on("keyup", (e) =>{		
-		const filtro = filterPokemon(data, input.val());
+		const filtro = filterPokemon(state.pokedex, input.val());
 
-		reRender(pokedex, filtro);
+		reRender(pokedex, filtro, update);
 	});
 
 	/*data.forEach((obj,i)=>{
@@ -84,7 +71,6 @@ const Pokedex = (data)=>{
 
 	div.append(divFiltro);
 	div.append(pokedex);
-	div.append(modal);
 
 	return div;	
 };

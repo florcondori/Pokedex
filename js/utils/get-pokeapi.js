@@ -13,6 +13,7 @@ const getPokedex = (callback)=>{
 
 	xhr.responseType ='json';
 	xhr.send();
+
 };
 
 const getPokemon = (callback,id)=>{
