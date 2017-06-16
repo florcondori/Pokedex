@@ -1,4 +1,17 @@
 'use strict';
+const Modal = ()=>{
+	const modal = $("<div clas='modal'></div>");
+
+
+	getPokemon((error,data)=>{
+		if(error) console.log("hubo un error");	
+		
+		console.log(data);
+
+	}, state.pokemonSelected);
+
+	return modal
+};
 /*const descripcion =(data)=>{
 	const descripcion = $("<div></div>");
 	data.forEach((obj)=>{

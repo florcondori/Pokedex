@@ -1,4 +1,16 @@
 'use strict';
+const mostrarModal = (modal)=>{
+	modal.empty();
+	modal.show();
+	console.log(state.pokemonSelected);
+	getPokemon((error,data)=>{
+		if(error) console.log("hubo un error");	
+		
+		console.log(data);
+
+	}, state.pokemonSelected);
+};
+
 const itemPokemon = (data)=>{
 	let name = data.pokemon_species.name;
 	let id = data.entry_number;
@@ -22,9 +34,9 @@ const itemPokemon = (data)=>{
 	
 	ancla.on("click", (e)=>{
 		e.preventDefault();
-		console.log(e.target);
-		//state.pokemonSelect = id;
-	
+
+		state.pokemonSelected = id;	
+		mostrarModal($(".modal"));
 	});
 
 	ancla.append(nombre);
@@ -45,16 +57,17 @@ const reRender = (container,encontrados)=>{
 };
 
 const Pokedex = (data)=>{
-	const container = $("<div></div>");
+	const div = $("<div></div>");
+	const divFiltro = $("<div></div>");
 	const input = $("<input></input>");
+	const button = $("<button>A-Z</button>");
 	const pokedex = $("<div class='pokedex'></div>");
 	const modal = $("<div class='modal'></div>");
 	
 	input.on("keyup", (e) =>{		
-		
-		let filtro = filterPokemon(data, input.val());
+		const filtro = filterPokemon(data, input.val());
 
-		reRender(pokedex,filtro);
+		reRender(pokedex, filtro);
 	});
 
 	/*data.forEach((obj,i)=>{
@@ -65,9 +78,13 @@ const Pokedex = (data)=>{
 		}
 	});
 */
-	container.append(input);
-	container.append(pokedex);
-	container.append(modal);
 
-	return container;	
+	divFiltro.append(input);
+	divFiltro.append(button);
+
+	div.append(divFiltro);
+	div.append(pokedex);
+	div.append(modal);
+
+	return div;	
 };

@@ -1,4 +1,5 @@
 'use strict';
+
 const filterPokemon = (pokemons, query)=>{
 
 	return pokemons.filter((pokemon)=>{

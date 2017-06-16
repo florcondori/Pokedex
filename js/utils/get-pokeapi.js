@@ -15,7 +15,7 @@ const getPokedex = (callback)=>{
 	xhr.send();
 };
 
-/*const getPokemon = (callback,id)=>{
+const getPokemon = (callback,id)=>{
 
 	const Url = 'https://pokeapi.co/api/v2/pokemon/';
 
@@ -30,4 +30,4 @@ const getPokedex = (callback)=>{
 	
 	xhr.responseType ='json';
 	xhr.send();
-};*/
+};
