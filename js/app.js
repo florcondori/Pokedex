@@ -20,7 +20,7 @@ const state = {
 $(_=>{
 
 	getPokedex((error,data)=>{
-		if(error) console.log("hubo un error obtener pokedex");	
+		if(error) console.log(error.message);	
 
 		const root = $(".root");
 		render(root);

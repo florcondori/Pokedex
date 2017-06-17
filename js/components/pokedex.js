@@ -22,9 +22,9 @@ const itemPokemon = (data, update)=>{
 	
 	ancla.on("click", (e)=>{
 		e.preventDefault();
-		state.pokemonSelected = id;	
-		
+		state.pokemonSelected = id;
 		update();
+
 	});
 
 	ancla.append(nombre);

@@ -14,6 +14,11 @@ const getPokedex = (callback)=>{
 	xhr.responseType ='json';
 	xhr.send();
 
+	/*$.get(Url, (data) => {
+	    if (data.status != 200) callback(new Error("Error al obtener la podekex"));
+	    callback(null,data);
+	});*/
+
 };
 
 const getPokemon = (callback,id)=>{
@@ -32,3 +37,4 @@ const getPokemon = (callback,id)=>{
 	xhr.responseType ='json';
 	xhr.send();
 };
+
