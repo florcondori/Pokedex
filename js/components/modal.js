@@ -1,22 +1,35 @@
 'use strict';
 const getHabilidades = (data)=>{
-	const 	array = [];
-	data.forEach((obj)=>{		
+	let array = [];
+	data.forEach((obj)=>{
 		array.push(obj.ability.name);
-	});
+	});		
+
 	return array;
 };
 
 const getDebilidad = ()=>{
+	const debilidad = $("<div></div>");
+	const p = $("<p>Debilidad:</p>");
 
+	return debilidad;
 };
 
-const getTipo = ()=>{
+const getTipo = (data)=>{
+	const tipo = $("<div class='tipo'></div>");
+	const p = $("<p>Tipo:</p>");
+	const div = $("<div></div>");
+	data.forEach((obj)=>{
+		div.append("<div class='caja'>"+obj.type.name+"</div>");
+	});
 
+	tipo.append(p);
+	tipo.append(div);
+	return tipo;
 };
 
 const getCaracteristicas = (data)=>{
-	const caracteristicas = $("<div class='caracteristicas'></div>");
+	const caracteristicas = $("<div></div>");
 	const div1 = $("<div></div>");
 	const altura = $("<p>Altura:</p>");
 	const datoAltura =$("<span>"+data.height+"</span>")
@@ -29,8 +42,8 @@ const getCaracteristicas = (data)=>{
 	const datoCategoria =$("<span></span>")
 	const habilidades = $("<p>Habilidades:</p>");
 	const datoHabilidades = $("<span></span>");
-	datoHabilidades.text(getHabilidades(data.abilities).join(","));
-	console.log(getHabilidades(data.abilities).join(","));
+	datoHabilidades.text(getHabilidades(data.abilities).join(", "));
+	
 	div2.append(categoria);
 	div2.append(datoCategoria);
 	div2.append(habilidades);
@@ -72,6 +85,7 @@ const Modal = ()=>{
 		console.log(data);
 		docFragment.append(getDescripcion(data.id));
 		docFragment.append(getCaracteristicas(data));
+		docFragment.append(getTipo(data.types));
 		cuadro.append(docFragment);
 	}, state.pokemonSelected);
 

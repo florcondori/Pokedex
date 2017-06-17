@@ -21,3 +21,9 @@
 p{
 	font-size: 14px;
 }
+.caja{
+	display: inline-block;
+	border: 1px solid black;
+	margin-right: 7px;
+	text-align: center;
+}
