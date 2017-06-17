@@ -1,26 +1,60 @@
 'use strict';
-const getHabilidades = (array)=>{
-	const habilidades = $("<div></div>");
-	const subtitulo = $("<p class='subtitulo'>Habilidades</p>");
-
-	habilidades.append(subtitulo);
-	array.forEach((obj)=>{
-		let p = $("<p></p>");
-		p.text(obj.ability.name);
-		habilidades.append(p);
+const getHabilidades = (data)=>{
+	const 	array = [];
+	data.forEach((obj)=>{		
+		array.push(obj.ability.name);
 	});
+	return array;
+};
 
-	return habilidades;
+const getDebilidad = ()=>{
+
+};
+
+const getTipo = ()=>{
+
+};
+
+const getCaracteristicas = (data)=>{
+	const caracteristicas = $("<div class='caracteristicas'></div>");
+	const div1 = $("<div></div>");
+	const altura = $("<p>Altura:</p>");
+	const datoAltura =$("<span>"+data.height+"</span>")
+	const peso = $("<p>Peso:</p>");
+	const datoPeso = $("<span>"+data.weight+"</span>");
+	const sexo = $("<p>Sexo:</p>");
+	const datoSexo = $("<span></span>");
+	const div2 = $("<div></div>");
+	const categoria = $("<p>Categoria:</p>");
+	const datoCategoria =$("<span></span>")
+	const habilidades = $("<p>Habilidades:</p>");
+	const datoHabilidades = $("<span></span>");
+	datoHabilidades.text(getHabilidades(data.abilities).join(","));
+	console.log(getHabilidades(data.abilities).join(","));
+	div2.append(categoria);
+	div2.append(datoCategoria);
+	div2.append(habilidades);
+	div2.append(datoHabilidades);
+
+	div1.append(altura);
+	div1.append(datoAltura);
+	div1.append(peso);
+	div1.append(datoPeso);
+	div1.append(sexo);
+
+	caracteristicas.append(div1);
+	caracteristicas.append(div2);
+
+	return caracteristicas;
 };
 
 const getDescripcion = (id)=>{
-	const descripcion = $("<div></div>");
+	const descripcion = $("<div class='descripcion'></div>");
 	$.getJSON("https://pokeapi.co/api/v2/pokemon-species/"+id+"/", (json)=>{		
 		
 		const p = $("<p></p>");
 		p.text(json.flavor_text_entries[11].flavor_text);
-		descripcion.append(p);		
-		
+		descripcion.append(p);			
 	}
 
 	);
@@ -37,7 +71,7 @@ const Modal = ()=>{
 		
 		console.log(data);
 		docFragment.append(getDescripcion(data.id));
-		docFragment.append(getHabilidades(data.abilities));
+		docFragment.append(getCaracteristicas(data));
 		cuadro.append(docFragment);
 	}, state.pokemonSelected);
 
