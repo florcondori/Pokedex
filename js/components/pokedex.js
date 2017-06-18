@@ -16,7 +16,12 @@ const itemPokemon = (data, update)=>{
 	const png = ".png";
 
 	const div = $("<div class='pokemon'></div>");
-	const imagen = $("<img src="+url+idNew+png+">");
+	const imgPokemon = $("<img src="+url+idNew+png+">");
+	const divTrapecio = $("<div class='trapecio'></div>");
+	const divIcon =$("<div class='flex-center'></div>");
+	const iconPokebola = $("<i class='icon pokebola'></i>");
+	const iconCorazon = $("<i class='icon heart'></i>");
+	const iconFlecha = $("<i class='icon flecha'></i>");
 	const ancla = $("<a href='#'></a>");
 	const nombre = $("<span>"+name+"</span>");
 	
@@ -29,7 +34,12 @@ const itemPokemon = (data, update)=>{
 
 	ancla.append(nombre);
 
-	div.append(imagen);
+	divIcon.append(iconPokebola);
+	divIcon.append(iconCorazon);
+	divIcon.append(iconFlecha);
+	divTrapecio.append(divIcon);
+	div.append(imgPokemon);
+	div.append(divTrapecio);
 	div.append(ancla);
 
 	return div;
