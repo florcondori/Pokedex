@@ -1,4 +1,5 @@
 'use strict';
+
 const getHabilidades = (data)=>{
 	let array = [];
 	data.forEach((obj)=>{
@@ -8,39 +9,59 @@ const getHabilidades = (data)=>{
 	return array;
 };
 
-const getDebilidad = ()=>{
-	const debilidad = $("<div></div>");
-	const p = $("<p>Debilidad:</p>");
-
-	return debilidad;
-};
+/*const getDebilidad = (tipo)=>{
+	var arrayj = [];
+	$.getJSON("https://pokeapi.co/api/v2/type/"+tipo,(json)=>{	
+		var array=json.damage_relations.double_damage_from;
+		console.log(json.damage_relations.double_damage_from);
+		 array.forEach((obj)=>{
+		 	arrayj.push(obj.name);
+		 });
+		 console.log(arrayj);
+	});
+	
+	
+	
+};*/
 
 const getTipo = (data)=>{
+	let arrayTipo = [];
+	let arrayDebilidad = [];
 	const tipo = $("<div class='tipo'></div>");
-	const p = $("<p>Tipo:</p>");
-	const div = $("<div></div>");
+	const pTipo = $("<p>Tipo:</p>");
+	const divTipo = $("<div></div>");
+	const dDebil = $("<p>Debilidad:</p>");
+	const divDebilidad = $("<div></div>");
 	data.forEach((obj)=>{
-		div.append("<div class='caja'>"+obj.type.name+"</div>");
+		divTipo.append("<div class='caja'>"+obj.type.name+"</div>");
+		arrayTipo.push(obj.type.name);
 	});
+	console.log(arrayTipo);
+	tipo.append(pTipo);
+	tipo.append(divTipo);
 
-	tipo.append(p);
-	tipo.append(div);
+	
+	arrayTipo.forEach(tipo=>{
+		console.log(getDebilidad(tipo));
+	});
+	
+		
 	return tipo;
 };
 
 const getCaracteristicas = (data)=>{
-	const caracteristicas = $("<div></div>");
-	const div1 = $("<div></div>");
+	const caracteristicas = $("<div class='flex bg-celeste text-white p-10 mv-7'></div>");
+	const div1 = $("<div class='mr-5'></div>");
 	const altura = $("<p>Altura:</p>");
-	const datoAltura =$("<span>"+data.height+"</span>")
-	const peso = $("<p>Peso:</p>");
-	const datoPeso = $("<span>"+data.weight+"</span>");
-	const sexo = $("<p>Sexo:</p>");
+	const datoAltura =$("<span>"+data.height+" m</span>")
+	const peso = $("<p class='mt-10'>Peso:</p>");
+	const datoPeso = $("<span>"+data.weight+" Kg</span>");
+	const sexo = $("<p class='mt-10'>Sexo:</p>");
 	const datoSexo = $("<span></span>");
 	const div2 = $("<div></div>");
 	const categoria = $("<p>Categoria:</p>");
 	const datoCategoria =$("<span></span>")
-	const habilidades = $("<p>Habilidades:</p>");
+	const habilidades = $("<p class='mt-10'>Habilidades:</p>");
 	const datoHabilidades = $("<span></span>");
 	datoHabilidades.text(getHabilidades(data.abilities).join(", "));
 	
@@ -76,20 +97,26 @@ const getDescripcion = (id)=>{
 
 const Modal = ()=>{
 	const modal = $("<div class='modal'></div>");
-	const cuadro = $("<div class='cuadro_modal'></div>");
+	const cuadro = $("<div class='cuadro-modal'></div>");
+	const cerrarModal = $("<a href='#'></a>");
+	const nombre = $("<h1 class='text-center text-capitalize'>"+state.pokemonSelected.name+"</h1>");
+	const div = $("<div class='flex space-around'></div>");
+	const divImg = $("<div class='width-25 bg-gris-claro text-center'><img src=http://assets.pokemon.com/assets/cms2/img/pokedex/detail/"+rellenarCeros(state.pokemonSelected.id)+".png></div>");
+	const divContenido = $("<div class='width-60'></div>");
 	var docFragment = $(document.createDocumentFragment());
-
-	getPokemon((error,data)=>{
-		if(error) console.log(error.message);	
 		
-		console.log(data);
-		docFragment.append(getDescripcion(data.id));
-		docFragment.append(getCaracteristicas(data));
-		docFragment.append(getTipo(data.types));
-		cuadro.append(docFragment);
-	}, state.pokemonSelected);
+	docFragment.append(getDescripcion(state.pokemonSelected.id));
+	docFragment.append(getCaracteristicas(state.pokemonSelected));
+	docFragment.append(getTipo(state.pokemonSelected.types));
+	divContenido.append(docFragment);
+		
+	div.append(divImg);
+	div.append(divContenido);
 
-	
+	cuadro.append(nombre);
+	cuadro.append(div);
+	cuadro.append(cerrarModal);
 	modal.append(cuadro);
+
 	return modal
 };

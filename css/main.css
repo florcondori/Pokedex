@@ -4,16 +4,24 @@
 	box-sizing: border-box;
 }
 img{
-	width: 100%;
+	width: 90%;
+}
+p{
+	font-size: 14px;
+}
+body{
+	width: 90%;
+	margin: 0 auto;
 }
 .pokedex{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 .pokemon{
-	width: 17%;
-	background-color: #dbdbdb;
+	width: 16%;	
+	margin: 20px;
+	text-align: center;
 }
 .trapecio{
 	background-image: url("../img/notch-collectibles.png");
@@ -21,12 +29,14 @@ img{
 	background-position: center;
 	background-size: 110% 120%;
 	width: 100%;
-	height: 50px;
-	
+	height: 50px;	
 }
 .flex-center{
 	display: flex;
 	justify-content: center;
+}
+div.flex-center a{
+	display: inherit;
 }
 .icon{
 	background-repeat: no-repeat;
@@ -44,12 +54,10 @@ img{
 .flecha{
 	background-image: url("../icon/data.png");
 }
-p{
-	font-size: 14px;
-}
+/*estilos del modal*/
 .modal{
 	position: absolute;
-	background-color: rgba(45,23,157,0.3);
+	background-color: rgba(110, 112, 106, 0.8);
 	top: 0;
 	left: 0;
 	right: 0;
@@ -58,18 +66,69 @@ p{
 	justify-content: center;
 	align-items: center;
 }
-.cuadro_modal{
-	width: 70%;
+.cuadro-modal{
+	position: relative;
 	background-color: white;
-	padding: 2rem;
+	padding: 2rem 4rem;
+	width: 70%;
 }
-.subtitulo{
-	font-size: 16px;
+.cuadro-modal a{
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background-image: url("../icon/cross-out.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
 }
-
 .caja{
 	display: inline-block;
 	border: 1px solid black;
 	margin-right: 7px;
+	padding: 1px 0;
 	text-align: center;
+	width: 100px;
+}
+/**/
+.bg-gris-claro{
+	background-color: #dbdbdb;
+}
+.flex{
+	display: flex;	
+}
+.width-25{
+	width: 25%;
+}
+.width-60{
+	width: 60%;
+}
+.mr-5{
+	margin-right: 5rem;
+}
+.bg-celeste{
+	background-color: #36a4d3;
+}
+.text-white{
+	color: white;
+}
+.text-center{
+	text-align: center;
+}
+.space-around{
+	justify-content: space-around;
+}
+.mv-7{
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+.p-10{
+	padding: 10px;
+}
+.mt-10{
+	margin-top: 10px;
+}
+.text-capitalize{
+	text-transform: capitalize;
 }

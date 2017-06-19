@@ -1,47 +1,56 @@
 'use strict';
-const itemPokemon = (data, update)=>{
-	let name = data.pokemon_species.name;
-	let id = data.entry_number;
-	let idNew;
+const rellenarCeros = (id)=>{
 	if(id<10){
-		idNew = "00"+id;
+		return "00"+id;
 	}
 	else if(id<100){
-		idNew = "0"+id;
+		return "0"+id;
 	}else if(id<1000){
-		idNew = id;
+		return id;
 	}
 
+};
+
+const itemPokemon = (data, update)=>{
+	let id = data.entry_number;
+	
 	const url = "http://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
 	const png = ".png";
 
-	const div = $("<div class='pokemon'></div>");
-	const imgPokemon = $("<img src="+url+idNew+png+">");
+	const div = $("<div class='pokemon bg-gris-claro'></div>");
+	const imgPokemon = $("<img src="+url+rellenarCeros(id)+png+">");
 	const divTrapecio = $("<div class='trapecio'></div>");
 	const divIcon =$("<div class='flex-center'></div>");
+	const ancla = $("<a href='#'></a>");
 	const iconPokebola = $("<i class='icon pokebola'></i>");
 	const iconCorazon = $("<i class='icon heart'></i>");
-	const iconFlecha = $("<i class='icon flecha'></i>");
-	const ancla = $("<a href='#'></a>");
-	const nombre = $("<span>"+name+"</span>");
+	const iconFlecha = $("<i class='icon flecha'></i>");	
+	const nombre = $("<p class='text-center text-capitalize'>"+data.pokemon_species.name+"</p>");
 	
 	ancla.on("click", (e)=>{
 		e.preventDefault();
-		state.pokemonSelected = id;
-		update();
-
+		getPokemon((error,data)=>{
+			if(error) console.log(error.message);	
+			
+			console.log(data);
+			state.pokemonSelected = data;
+			update();
+		}, id);
+		
 	});
 
-	ancla.append(nombre);
+	ancla.append(iconPokebola);
 
-	divIcon.append(iconPokebola);
+	divIcon.append(ancla);
 	divIcon.append(iconCorazon);
 	divIcon.append(iconFlecha);
+
 	divTrapecio.append(divIcon);
+	divTrapecio.append(nombre);
+
 	div.append(imgPokemon);
 	div.append(divTrapecio);
-	div.append(ancla);
-
+	
 	return div;
 };
 
@@ -67,14 +76,14 @@ const Pokedex = (update)=>{
 		reRender(pokedex, filtro, update);
 	});
 
-	/*data.forEach((obj,i)=>{
+	/*state.pokedex.forEach((obj,i)=>{
 		if(i<=10){
 			let name = obj.pokemon_species.name;
 			let id = obj.entry_number;
-			pokedex.append(itemPokemon(id, name));			
+			pokedex.append(itemPokemon(obj, update));			
 		}
-	});
-*/
+	});*/
+
 
 	divFiltro.append(input);
 	divFiltro.append(button);
